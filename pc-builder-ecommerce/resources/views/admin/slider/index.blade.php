@@ -16,6 +16,21 @@
                 data-bs-target="#createModal">Add New Slider</a>
         </div>
 
+        {{-- alert --}}
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         <table id="datatablesSimple">
             <thead>
                 <tr>
@@ -24,6 +39,7 @@
                     <th>Image</th>
                     <th>Added By ID</th>
                     <th>Updated By ID</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tfoot>
@@ -41,15 +57,24 @@
                     <tr>
                         <td>{{ $slider->id }}</td>
                         <td>{{ $slider->title }}</td>
-                        <td>{{ $slider->image }}</td>
+                        <td>
+                            <img src="{{ asset($slider->image) }}" alt="{{ $slider->image }}" class="img-thumbnail"
+                                width="100">
+                        </td>
                         <td>{{ $slider->added_by_id }}</td>
                         <td>{{ $slider->updated_by_id }}</td>
                         <td>
-                            <a href="" class="btn btn-lg btn-outline-warning">Edit</a>
-                            <a href="" class="btn btn-lg btn-outline-danger">Delete</a>
+                            <button class="btn btn-outline-warning" data-bs-toggle="modal"
+                                data-bs-target="#editModal{{ $slider->id }}">Edit
+                            </button>
+                            <form action="{{ route('slider.destroy', $slider->id) }}" method="POST" class="d-inline">
+                                @csrf @method('delete')
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
+            </tbody>
         </table>
     </div>
 
@@ -61,23 +86,95 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Slider</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ route('slider.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                <form action="{{ route('slider.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+
+                        <div class="form-group mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" name="title" class="form-control" value="{{ old('title') }}">
+                            @error('title')
+                                <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Upload Image</label>
-                            <input type="file" class="form-control" id="image" placeholder="Upload Image">
+                            <input type="file" class="form-control" id="image" name="image"
+                                placeholder="Upload Image">
+                            @error('image')
+                                <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                            @enderror
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Add</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <!-- Edit Modal -->
+    @foreach ($sliders as $slider)
+        <div class="modal fade" id="editModal{{ $slider->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Slider</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('slider.update', $slider->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf @method('PUT')
+                        <div class="modal-body">
+
+                            <div class="form-group mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" name="title" class="form-control" value="{{ $slider->title }}">
+                                @error('title')
+                                    <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Upload Image</label>
+                                <input type="file" class="form-control" id="image" name="image"
+                                    placeholder="Upload Image">
+                                @error('image')
+                                    <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <!-- Script to reopen create-modal if validation fails -->
+    @if ($errors->any() && session('form') === 'create')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var createModal = new bootstrap.Modal(document.getElementById('createModal'));
+                createModal.show();
+            });
+        </script>
+    @endif
+
+    <!-- Script to reopen edit-modal if validation fails -->
+    @if ($errors->any() && session('edit_slider_id'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var editModal = new bootstrap.Modal(document.getElementById(
+                    'editModal{{ session('edit_slider_id') }}'));
+                editModal.show();
+            });
+        </script>
+    @endif
 @endsection

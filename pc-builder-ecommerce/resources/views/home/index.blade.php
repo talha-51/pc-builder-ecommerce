@@ -4,97 +4,71 @@
     <!-- Side Navbar Start -->
     <div class="container-fluid row">
         <div class="col-2">
-            <div class="btn-group dropend d-block">
-                <button type="button" class="btn btn-dark dropdown-toggle w-100" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    PC Components
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">CPU</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">GPU</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Motherboard</a></li>
-                </ul>
-            </div>
-
-            <div class="btn-group dropend d-block mt-1">
-                <button type="button" class="btn btn-dark dropdown-toggle w-100" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Accessories
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Mouse</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Keyboard</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Headphone</a></li>
-                </ul>
-            </div>
-
-            <div class="btn-group dropend d-block mt-1">
-                <button type="button" class="btn btn-dark dropdown-toggle w-100" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Networking
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Router</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">ONU</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Starlink</a></li>
-                </ul>
-            </div>
+            @foreach ($categories as $category)
+                <div class="btn-group dropend d-block mt-1">
+                    <button type="button" class="btn btn-dark dropdown-toggle w-100" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ $category->name }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach ($subcategories->where('cat_id', $category->id) as $subcategory)
+                            <li><a class="dropdown-item" href="">{{ $subcategory->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
         </div>
         <!-- Side Navbar End -->
 
         <!-- Hero Carousel Start -->
         <div class="col-10">
-            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active" data-bs-interval="2000">
-                        <img src="{{ asset('images') }}/intel.png" class="d-block w-100" alt="..."
-                            style="height: 700px; object-fit: cover;" />
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                @if ($sliders->isEmpty())
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('images/sliders/Image_not_available.png') }}"
+                                class="d-block w-100 img-fluid object-fit-contain" alt="No image available"
+                                style="max-height: 80vh;" />
+                        </div>
                     </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                        <img src="{{ asset('images') }}/amd.jpg" class="d-block w-100" alt="..."
-                            style="height: 700px; object-fit: cover;" />
+                @else
+                    <!-- Dynamic indicators -->
+                    <div class="carousel-indicators">
+                        @foreach ($sliders as $key => $slider)
+                            <button type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"
+                                aria-current="{{ $key == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $key + 1 }}">
+                            </button>
+                        @endforeach
                     </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                        <img src="{{ asset('images') }}/nvidia.png" class="d-block w-100" alt="..."
-                            style="height: 700px; object-fit: cover;" />
+
+                    <!-- Dynamic slides -->
+                    <div class="carousel-inner">
+                        @foreach ($sliders as $key => $slider)
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" data-bs-interval="2000">
+                                <img src="{{ asset($slider->image) }}" class="d-block w-100 img-fluid object-fit-contain"
+                                    alt="Slider image" style="max-height: 80vh;" />
+                            </div>
+                        @endforeach
                     </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+
+                    <!-- Controls -->
+                    <!-- Previous -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark bg-opacity-75 p-3 rounded-circle"
+                            aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <!-- Next -->
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark bg-opacity-75 p-3 rounded-circle"
+                            aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                @endif
             </div>
         </div>
         <!-- Hero Carousel End -->

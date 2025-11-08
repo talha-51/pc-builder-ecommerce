@@ -3,8 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SubCategoryController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -27,8 +32,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/user-list', [AdminController::class, 'userList'])->name('admin.userList');
 
-    // Hero Slider
+    // Resource Controllers
     Route::resource('slider', SliderController::class);
+    Route::resource('category', CategoryController::class);
+    Route::resource('sub-category', SubCategoryController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('brand', BrandController::class);
+    Route::resource('settings', SettingsController::class);
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
