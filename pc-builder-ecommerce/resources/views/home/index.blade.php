@@ -93,169 +93,58 @@
     </div>
     <!-- Catagories End -->
 
-    <!-- PC Components Catagory Card Carousel Start -->
-    <div class="container-fluid text-center mb-5">
-        <h3 class="fw-bold mb-4">PC Components</h3>
-        <div class="carousel-wrapper position-relative">
-            <button class="carousel-btn prevBtn"><i class="bi bi-chevron-left"></i></button>
-            <div class="carousel-viewport">
-                <div class="carousel-track">
-                    <div class="product-card"><img src="{{ asset('images') }}/pccomp-1.jpg">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-1</p>
-                            </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
-                    </div>
-                    <div class="product-card"><img src="{{ asset('images') }}/pccomp-2.webp">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-2</p>
-                            </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
-                    </div>
-                    <div class="product-card"><img src="{{ asset('images') }}/pccomp-3.png">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-3</p>
-                            </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
-                    </div>
-                    <div class="product-card"><img src="{{ asset('images') }}/pccomp-4.jpg">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-4</p>
-                            </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
-                    </div>
-                    <div class="product-card"><img src="{{ asset('images') }}/pccomp-5.png">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-5</p>
-                            </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-btn nextBtn"><i class="bi bi-chevron-right"></i></button>
-        </div>
-    </div>
-    <!-- PC Components Catagory Card Carousel End -->
+    <!-- Products Card carousel grouped by category Start -->
+    @foreach ($categories as $category)
+        <div class="container-fluid text-center mb-5">
+            <h1 class="mb-4">{{ $category->name }}</h1>
 
-    <!-- Accessories Catagory Card Carousel Start -->
-    <div class="container-fluid text-center mb-5">
-        <h3 class="fw-bold mb-4">Accessories</h3>
-        <div class="carousel-wrapper position-relative">
-            <button class="carousel-btn prevBtn"><i class="bi bi-chevron-left"></i></button>
-            <div class="carousel-viewport">
-                <div class="carousel-track">
-                    <div class="product-card"><img src="{{ asset('images') }}/accessories-1.webp">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-1</p>
+            <div class="carousel-wrapper position-relative">
+                <button class="carousel-btn prevBtn"><i class="bi bi-chevron-left"></i></button>
+
+                <div class="carousel-viewport">
+                    <div class="carousel-track">
+                        @foreach ($products->where('cat_id', $category->id) as $product)
+                            <div class="product-card">
+                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                        <p>{{ $product->name }}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>{{ $product->price }} BDT</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-success">Add to Cart</button>
+                                    <button class="btn btn-sm btn-danger">Buy Now</button>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
-                    </div>
-                    <div class="product-card"><img src="{{ asset('images') }}/accessories-2.jpg">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-2</p>
-                            </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
-                    </div>
-                    <div class="product-card"><img src="{{ asset('images') }}/accessories-3.jpg">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-3</p>
-                            </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
-                    </div>
-                    <div class="product-card"><img src="{{ asset('images') }}/accessories-4.webp">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-4</p>
-                            </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
-                    </div>
-                    <div class="product-card"><img src="{{ asset('images') }}/accessories-5.webp">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <p>Title: Product-5</p>
-                            </div>
-                            <div class="col-6">
-                                <p>Price: 1000 BDT</p>
-                            </div>
-                        </div>
-                        <div><button class="btn btn-sm btn-outline-success">Add to Cart</button><button
-                                class="btn btn-sm btn-danger">Buy Now</button></div>
+                        @endforeach
                     </div>
                 </div>
+
+                <button class="carousel-btn nextBtn"><i class="bi bi-chevron-right"></i></button>
             </div>
-            <button class="carousel-btn nextBtn"><i class="bi bi-chevron-right"></i></button>
         </div>
-    </div>
-    <!-- Accessories Catagory Card Carousel End -->
+    @endforeach
+    <!-- Products Card carousel grouped by category End -->
+
 
     <!-- Brand Section Start -->
     <div class="container-fluid mt-5">
         <div class="container-fluid text-center">
-            <h1>Brands</h1>
+            <h1 class="mb-4">Brands</h1>
         </div>
-        <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="200px">
-            <img src="{{ asset('images') }}/gigabyte-logo.webp" style="width: 300px; height: 150px;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="{{ asset('images') }}/aorus-logo.jpg" style="width: 300px; height: 150px;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="{{ asset('images') }}/intel.png" style="width: 300px; height: 150px;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="{{ asset('images') }}/amd.jpg" style="width: 300px; height: 150px;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="{{ asset('images') }}/nvidia.png" style="width: 300px; height: 150px;">
+        <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="220px">
+            <div class="d-flex">
+                @foreach ($brands as $brand)
+                    <div class="text-center mx-4">
+                        <img src="{{ $brand->image }}" class="img-thumbnail rounded-circle object-fit-cover mb-2"
+                            style="width: 150px; height: 150px;">
+                        <div class="fw-bold fs-5 text-dark">{{ $brand->name }}</div>
+                    </div>
+                @endforeach
+            </div>
         </marquee>
     </div>
     <!-- Brand Section End -->

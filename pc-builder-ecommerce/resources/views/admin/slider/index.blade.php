@@ -12,8 +12,7 @@
         </ol>
 
         <div class="d-grid gap-2 mb-4">
-            <a href="{{ route('slider.create') }}" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                data-bs-target="#createModal">Add New Slider</a>
+            <button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add New Slider</button>
         </div>
 
         {{-- alert --}}

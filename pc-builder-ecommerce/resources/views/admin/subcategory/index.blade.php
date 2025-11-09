@@ -12,8 +12,8 @@
         </ol>
 
         <div class="d-grid gap-2 mb-4">
-            <a href="{{ route('category.create') }}" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                data-bs-target="#createModal">Add New Sub-Category</a>
+            <button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add New
+                Sub-Category</button>
         </div>
 
         {{-- alert --}}
@@ -36,8 +36,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Category ID</th>
                     <th>Image</th>
+                    <th>Category ID</th>
                     <th>Added By ID</th>
                     <th>Updated By ID</th>
                     <th>Action</th>
@@ -47,8 +47,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Category ID</th>
                     <th>Image</th>
+                    <th>Category ID</th>
                     <th>Added By ID</th>
                     <th>Updated By ID</th>
                     <th>Action</th>
@@ -59,11 +59,11 @@
                     <tr>
                         <td>{{ $subcategory->id }}</td>
                         <td>{{ $subcategory->name }}</td>
-                        <td>{{ $subcategory->cat_id }}</td>
                         <td>
                             <img src="{{ asset($subcategory->image) }}" alt="{{ $subcategory->name }}" class="img-thumbnail"
                                 width="100">
                         </td>
+                        <td>{{ $subcategory->cat_id }}</td>
                         <td>{{ $subcategory->added_by_id }}</td>
                         <td>{{ $subcategory->updated_by_id }}</td>
                         <td>

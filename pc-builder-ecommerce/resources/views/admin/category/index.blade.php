@@ -12,8 +12,8 @@
         </ol>
 
         <div class="d-grid gap-2 mb-4">
-            <a href="{{ route('category.create') }}" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                data-bs-target="#createModal">Add New Category</a>
+            <button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add New
+                Category</button>
         </div>
 
         {{-- alert --}}

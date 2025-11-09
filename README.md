@@ -10,6 +10,8 @@
 - **Hero Carousel single page CRUD with validation**
 - **Category CRUD with validation**
 - **Sub-Category CRUD with validation**
+- **Product CRUD with validation**
+- **Brand CRUD with validation**
 
 ### Integrations
 - **Laravel Breeze**
