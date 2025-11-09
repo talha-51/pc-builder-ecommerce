@@ -79,16 +79,16 @@
         <div class="container-fluid text-center">
             <h1>Categories</h1>
         </div>
-        <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="200px">
-            <img src="{{ asset('images') }}/gigabyte-logo.webp" style="width: 150px; height: 150px; border-radius: 50%;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="{{ asset('images') }}/aorus-logo.jpg" style="width: 150px; height: 150px; border-radius: 50%;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="{{ asset('images') }}/intel.png" style="width: 150px; height: 150px; border-radius: 50%;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="{{ asset('images') }}/amd.jpg" style="width: 150px; height: 150px; border-radius: 50%;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="{{ asset('images') }}/nvidia.png" style="width: 150px; height: 150px; border-radius: 50%;">
+        <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="220px">
+            <div class="d-flex">
+                @foreach ($categories as $category)
+                    <div class="text-center mx-4">
+                        <img src="{{ $category->image }}" class="img-thumbnail rounded-circle object-fit-cover mb-2"
+                            style="width: 150px; height: 150px;">
+                        <div class="fw-bold fs-5 text-dark">{{ $category->name }}</div>
+                    </div>
+                @endforeach
+            </div>
         </marquee>
     </div>
     <!-- Catagories End -->
