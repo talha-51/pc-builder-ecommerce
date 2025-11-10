@@ -19,4 +19,25 @@ class HomeController extends Controller
 
         return view('home.index', compact('sliders', 'categories', 'subcategories','products','brands', 'settings'));
     }
+
+    public function filteredByCategoryProducts($name, $id)
+    {
+        $categories = DB::table('categories')->where('id', $id)->first();
+        $subcategories = DB::table('sub_categories')->get();
+        $settings = DB::table('settings')->first();
+
+        $filteredByCategoryProducts = DB::table('products')->where('cat_id', $id)->get();
+
+        return view('home.filteredByCategoryProducts', compact('categories', 'subcategories', 'settings' ,'filteredByCategoryProducts'));
+    }
+
+    public function filteredBySubCategoryProducts($sub, $id)
+    {
+        $subcategories = DB::table('sub_categories')->where('id', $id)->first();
+        $settings = DB::table('settings')->first();
+
+        $filteredBySubCategoryProducts = DB::table('products')->where('sub_id', $id)->get();
+
+        return view('home.filteredBySubCategoryProducts', compact('subcategories', 'settings' ,'filteredBySubCategoryProducts'));
+    }
 }

@@ -60,8 +60,10 @@
                             <img src="{{ asset($brand->image) }}" alt="{{ $brand->name }}" class="img-thumbnail"
                                 width="75">
                         </td>
-                        <td>{{ $brand->added_by_id }}</td>
-                        <td>{{ $brand->updated_by_id }}</td>
+                        <td>{{ optional($users->firstWhere('id', $brand->added_by_id))->name }}</td>
+                        <td>{{ optional($users->firstWhere('id', $brand->updated_by_id))->name }}</td>
+                        {{-- <td>{{ $brand->added_by_id }}</td>
+                        <td>{{ $brand->updated_by_id }}</td> --}}
                         <td>
                             <a href="{{ route('brand.edit', $brand->id) }}"><button
                                     class="btn btn-outline-warning">Edit</button></a>

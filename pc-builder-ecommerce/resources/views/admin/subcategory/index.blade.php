@@ -37,9 +37,9 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Image</th>
-                    <th>Category ID</th>
-                    <th>Added By ID</th>
-                    <th>Updated By ID</th>
+                    <th>Category Name</th>
+                    <th>Added By</th>
+                    <th>Updated By</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -48,9 +48,9 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Image</th>
-                    <th>Category ID</th>
-                    <th>Added By ID</th>
-                    <th>Updated By ID</th>
+                    <th>Category Name</th>
+                    <th>Added By</th>
+                    <th>Updated By</th>
                     <th>Action</th>
                 </tr>
             </tfoot>
@@ -63,9 +63,12 @@
                             <img src="{{ asset($subcategory->image) }}" alt="{{ $subcategory->name }}" class="img-thumbnail"
                                 width="100">
                         </td>
-                        <td>{{ $subcategory->cat_id }}</td>
+                        <td>{{ optional($categories->firstWhere('id', $subcategory->cat_id))->name }}</td>
+                        <td>{{ optional($users->firstWhere('id', $subcategory->added_by_id))->name }}</td>
+                        <td>{{ optional($users->firstWhere('id', $subcategory->updated_by_id))->name }}</td>
+                        {{-- <td>{{ $subcategory->cat_id }}</td>
                         <td>{{ $subcategory->added_by_id }}</td>
-                        <td>{{ $subcategory->updated_by_id }}</td>
+                        <td>{{ $subcategory->updated_by_id }}</td> --}}
                         <td>
                             <a href="{{ route('sub-category.edit', $subcategory->id) }}"><button
                                     class="btn btn-outline-warning">Edit</button></a>

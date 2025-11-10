@@ -1,5 +1,12 @@
 @extends('layouts.frontend.master')
 
+@section('title')
+    @if (!$settings)
+    @else
+        {{ $settings->company_name }}
+    @endif
+@endsection
+
 @section('logo')
     @if (!$settings)
         <img src="{{ asset('images/logos/Image_not_available.png') }}" alt="logo" style="width: 150px; height: 70px;">
@@ -36,18 +43,26 @@
         <div class="col-2">
             @foreach ($categories as $category)
                 <div class="btn-group dropend d-block mt-1">
-                    <button type="button" class="btn btn-dark dropdown-toggle w-100" data-bs-toggle="dropdown"
+                    <a href="{{ route('home.filteredByCategoryProducts', ['name' => $category->name, 'id' => $category->id]) }}"
+                        class="btn btn-dark dropdown-toggle w-100 category-btn" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         {{ $category->name }}
-                    </button>
+                    </a>
                     <ul class="dropdown-menu">
                         @foreach ($subcategories->where('cat_id', $category->id) as $subcategory)
-                            <li><a class="dropdown-item" href="">{{ $subcategory->name }}</a></li>
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{{ route('home.filteredBySubCategoryProducts', ['sub' => $subcategory->name, 'id' => $subcategory->id]) }}">
+                                    {{ $subcategory->name }}
+                                </a>
+                            </li>
                         @endforeach
                     </ul>
                 </div>
             @endforeach
         </div>
+
+
         <!-- Side Navbar End -->
 
         <!-- Hero Carousel Start -->
@@ -103,7 +118,7 @@
         <!-- Hero Carousel End -->
     </div>
 
-    <!-- Catagories Start -->
+    <!-- Catagories marquee Start -->
     <div class="container-fluid mt-5">
         <div class="container-fluid text-center">
             <h1>Categories</h1>
@@ -111,16 +126,20 @@
         <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="220px">
             <div class="d-flex">
                 @foreach ($categories as $category)
-                    <div class="text-center mx-4">
-                        <img src="{{ $category->image }}" class="img-thumbnail rounded-circle object-fit-cover mb-2"
-                            style="width: 150px; height: 150px;">
-                        <div class="fw-bold fs-5 text-dark">{{ $category->name }}</div>
-                    </div>
+                    <a href="{{ route('home.filteredByCategoryProducts', ['name' => $category->name, 'id' => $category->id]) }}"
+                        class="text-decoration-none">
+                        <div class="text-center mx-4">
+                            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}"
+                                class="img-thumbnail rounded-circle object-fit-cover mb-2"
+                                style="width: 150px; height: 150px;">
+                            <div class="fw-bold fs-5 text-dark">{{ $category->name }}</div>
+                        </div>
+                    </a>
                 @endforeach
             </div>
         </marquee>
     </div>
-    <!-- Catagories End -->
+    <!-- Catagories marquee End -->
 
     <!-- Products Card carousel grouped by category Start -->
     @foreach ($categories as $category)
@@ -135,17 +154,13 @@
                         @foreach ($products->where('cat_id', $category->id) as $product)
                             <div class="product-card">
                                 <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
-                                <div class="row mt-2">
-                                    <div class="col-6">
-                                        <p>{{ $product->name }}</p>
+                                <div class="card-body bg-light">
+                                    <h5 class="card-title">{{ $product->name }}</h5>
+                                    <p class="card-text">{{ $product->price }}</p>
+                                    <div class="text-center">
+                                        <button class="btn btn-sm btn-outline-success">Add to Cart</button>
+                                        <button class="btn btn-sm btn-danger">Buy Now</button>
                                     </div>
-                                    <div class="col-6">
-                                        <p>{{ $product->price }} BDT</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <button class="btn btn-sm btn-outline-success">Add to Cart</button>
-                                    <button class="btn btn-sm btn-danger">Buy Now</button>
                                 </div>
                             </div>
                         @endforeach

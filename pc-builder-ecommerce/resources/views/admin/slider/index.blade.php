@@ -36,8 +36,8 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Image</th>
-                    <th>Added By ID</th>
-                    <th>Updated By ID</th>
+                    <th>Added By</th>
+                    <th>Updated By</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -46,8 +46,8 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Image</th>
-                    <th>Added By ID</th>
-                    <th>Updated By ID</th>
+                    <th>Added By</th>
+                    <th>Updated By</th>
                     <th>Action</th>
                 </tr>
             </tfoot>
@@ -60,8 +60,10 @@
                             <img src="{{ asset($slider->image) }}" alt="{{ $slider->image }}" class="img-thumbnail"
                                 width="100">
                         </td>
-                        <td>{{ $slider->added_by_id }}</td>
-                        <td>{{ $slider->updated_by_id }}</td>
+                        <td>{{ optional($users->firstWhere('id', $slider->added_by_id))->name }}</td>
+                        <td>{{ optional($users->firstWhere('id', $slider->updated_by_id))->name }}</td>
+                        {{-- <td>{{ $slider->added_by_id }}</td>
+                        <td>{{ $slider->updated_by_id }}</td> --}}
                         <td>
                             <button class="btn btn-outline-warning" data-bs-toggle="modal"
                                 data-bs-target="#editModal{{ $slider->id }}">Edit

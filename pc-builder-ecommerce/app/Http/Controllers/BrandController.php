@@ -15,8 +15,9 @@ class BrandController extends Controller
     public function index()
     {
         $brands = DB::table('brands')->get();
+        $users = DB::table('users')->select('id', 'name')->get();
 
-        return view('admin.brand.index')->with('brands', $brands);
+        return view('admin.brand.index', compact('brands', 'users'));
     }
 
     /**

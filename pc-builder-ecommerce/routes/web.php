@@ -16,6 +16,8 @@ use App\Http\Controllers\SubCategoryController;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/{name}/{id}', [HomeController::class, 'filteredByCategoryProducts'])->name('home.filteredByCategoryProducts');
+Route::get('/filteredBySubCategoryProducts/{sub}/{id}', [HomeController::class, 'filteredBySubCategoryProducts'])->name('home.filteredBySubCategoryProducts');
 
 
 

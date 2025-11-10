@@ -16,8 +16,9 @@ class SliderController extends Controller
     public function index()
     {
         $sliders = DB::table('sliders')->get();
+        $users = DB::table('users')->select('id', 'name')->get();
 
-        return view('admin.slider.index')->with('sliders', $sliders);
+        return view('admin.slider.index', compact('sliders', 'users'));
     }
 
     /**

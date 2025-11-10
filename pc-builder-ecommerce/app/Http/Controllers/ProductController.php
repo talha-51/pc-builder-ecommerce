@@ -17,8 +17,9 @@ class ProductController extends Controller
         $products = DB::table('products')->get();
         $categories = DB::table('categories')->get();
         $subcategories = DB::table('sub_categories')->get();
+        $users = DB::table('users')->select('id', 'name')->get();
 
-        return view('admin.product.index', compact('subcategories', 'categories', 'products'));
+        return view('admin.product.index', compact('subcategories', 'categories', 'products', 'users'));
     }
 
     /**

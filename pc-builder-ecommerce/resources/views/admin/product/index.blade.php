@@ -39,10 +39,10 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Image</th>
-                    <th>Category ID</th>
-                    <th>Sub-Category ID</th>
-                    <th>Added By ID</th>
-                    <th>Updated By ID</th>
+                    <th>Category Name</th>
+                    <th>Sub-Category Name</th>
+                    <th>Added By</th>
+                    <th>Updated By</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -53,10 +53,10 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Image</th>
-                    <th>Category ID</th>
-                    <th>Sub-Category ID</th>
-                    <th>Added By ID</th>
-                    <th>Updated By ID</th>
+                    <th>Category Name</th>
+                    <th>Sub-Category Name</th>
+                    <th>Added By</th>
+                    <th>Updated By</th>
                     <th>Action</th>
                 </tr>
             </tfoot>
@@ -71,10 +71,14 @@
                             <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="img-thumbnail"
                                 width="75">
                         </td>
-                        <td>{{ $product->cat_id }}</td>
+                        <td>{{ optional($categories->firstWhere('id', $product->cat_id))->name }}</td>
+                        <td>{{ optional($subcategories->firstWhere('id', $product->sub_id))->name }}</td>
+                        <td>{{ optional($users->firstWhere('id', $product->added_by_id))->name }}</td>
+                        <td>{{ optional($users->firstWhere('id', $product->updated_by_id))->name }}</td>
+                        {{-- <td>{{ $product->cat_id }}</td>
                         <td>{{ $product->sub_id }}</td>
                         <td>{{ $product->added_by_id }}</td>
-                        <td>{{ $product->updated_by_id }}</td>
+                        <td>{{ $product->updated_by_id }}</td> --}}
                         <td>
                             <a href="{{ route('product.edit', $product->id) }}"><button
                                     class="btn btn-outline-warning">Edit</button></a>

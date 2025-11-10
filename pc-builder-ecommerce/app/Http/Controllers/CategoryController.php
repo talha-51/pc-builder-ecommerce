@@ -15,8 +15,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = DB::table('categories')->get();
+        $users = DB::table('users')->select('id', 'name')->get();
 
-        return view('admin.category.index')->with('categories', $categories);
+        return view('admin.category.index', compact('categories','users'));
     }
 
     /**

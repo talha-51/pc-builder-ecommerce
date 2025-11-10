@@ -16,8 +16,9 @@ class SubCategoryController extends Controller
     {
         $subcategories = DB::table('sub_categories')->get();
         $categories = DB::table('categories')->get();
+        $users = DB::table('users')->select('id', 'name')->get();
 
-        return view('admin.subcategory.index', compact('subcategories', 'categories'));
+        return view('admin.subcategory.index', compact('subcategories', 'categories', 'users'));
     }
 
     /**
@@ -35,9 +36,9 @@ class SubCategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|max:20',
-            'image' => 'required|mimes:png,jpg|max:2048|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080',
+            'image' => 'required|mimes:png,jpg,webp|max:2048|dimensions:min_width=500,min_height=500,max_width=500,max_height=500',
             ], [
-                'image.dimensions' => 'Image resolution must be 1920*1080'
+                'image.dimensions' => 'Image resolution must be 500*500'
         ]);
 
         $img = time() . '.' . $request->image->getClientOriginalExtension();
@@ -81,9 +82,9 @@ class SubCategoryController extends Controller
     {
         $request->validate([
         'name' => 'required|max:20',
-        'image' => 'nullable|mimes:png,jpg|max:2048|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080',
+        'image' => 'nullable|mimes:png,jpg,webp|max:2048|dimensions:min_width=500,min_height=500,max_width=500,max_height=500',
         ], [
-            'image.dimensions' => 'Image resolution must be 1920*1080'
+            'image.dimensions' => 'Image resolution must be 500*500'
         ]);
 
         if ($request->hasFile('image')) {

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@yield('company_name')</title>
+    <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
 
@@ -170,6 +170,35 @@
 
     <!-- Js for sidenav hover effect Start -->
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Fix hover behavior
+            document.querySelectorAll('.dropend').forEach(function(dropend) {
+                const button = dropend.querySelector('.dropdown-toggle');
+                const dropdown = new bootstrap.Dropdown(button);
+
+                dropend.addEventListener('mouseenter', function() {
+                    dropdown.show();
+                });
+
+                dropend.addEventListener('mouseleave', function() {
+                    dropdown.hide();
+                });
+            });
+
+            // Allow clicking the link to actually navigate
+            document.querySelectorAll('.category-btn').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    // Prevent Bootstrap from blocking navigation
+                    e.stopPropagation(); // stop dropdown behavior
+                    window.location = this.href; // go to link
+                });
+            });
+
+        });
+    </script>
+
+    {{-- <script>
         document.querySelectorAll('.dropend').forEach(function(dropdown) {
             dropdown.addEventListener('mouseenter', function() {
                 const button = this.querySelector('.dropdown-toggle');
@@ -184,7 +213,7 @@
                 bsDropdown.hide();
             });
         });
-    </script>
+    </script> --}}
     <!-- Js for sidenav hover effect End -->
 
 
@@ -241,6 +270,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    < script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" >
+</script>
+
 </script>
 </body>
 

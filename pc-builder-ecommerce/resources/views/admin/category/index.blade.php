@@ -37,8 +37,8 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Image</th>
-                    <th>Added By ID</th>
-                    <th>Updated By ID</th>
+                    <th>Added By</th>
+                    <th>Updated By</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -47,8 +47,8 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Image</th>
-                    <th>Added By ID</th>
-                    <th>Updated By ID</th>
+                    <th>Added By</th>
+                    <th>Updated By</th>
                     <th>Action</th>
                 </tr>
             </tfoot>
@@ -61,8 +61,10 @@
                             <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" class="img-thumbnail"
                                 width="100">
                         </td>
-                        <td>{{ $category->added_by_id }}</td>
-                        <td>{{ $category->updated_by_id }}</td>
+                        <td>{{ optional($users->firstWhere('id', $category->added_by_id))->name }}</td>
+                        <td>{{ optional($users->firstWhere('id', $category->updated_by_id))->name }}</td>
+                        {{-- <td>{{ $category->added_by_id }}</td>
+                        <td>{{ $category->updated_by_id }}</td> --}}
                         <td>
                             <a href="{{ route('category.edit', $category->id) }}"><button
                                     class="btn btn-outline-warning">Edit</button></a>
