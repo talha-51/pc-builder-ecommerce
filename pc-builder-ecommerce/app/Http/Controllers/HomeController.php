@@ -14,7 +14,9 @@ class HomeController extends Controller
         $subcategories = DB::table('sub_categories')->get();
         $products = DB::table('products')->get();
         $brands = DB::table('brands')->get();
+        $settings = DB::table('settings')->first();
+        // $settings = DB::table('settings')->orderBy('id', 'desc')->first();
 
-        return view('home.index', compact('sliders', 'categories', 'subcategories','products','brands'));
+        return view('home.index', compact('sliders', 'categories', 'subcategories','products','brands', 'settings'));
     }
 }

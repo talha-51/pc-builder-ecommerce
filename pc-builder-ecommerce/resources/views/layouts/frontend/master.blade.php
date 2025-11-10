@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>EZone</title>
+    <title>@yield('company_name')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
 
@@ -86,8 +86,7 @@
     <!-- Top Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('home.index') }}"><img src="{{ asset('images') }}/ezone.png"
-                    alt="EZone" style="width: 150px; height: 70px;"></a>
+            <a class="navbar-brand" href="{{ route('home.index') }}">@yield('logo')</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -136,7 +135,11 @@
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <h5>About Us</h5>
-                    <p>We provide high-quality computer components and accessories under the brand EZone.</p>
+                    <p>We provide high-quality computer components and accessories under the brand @yield('company_name')</p>
+                    <p>
+                        Email: @yield('email')<br>
+                        <i class="bi bi-telephone">@yield('contact_no')</i>
+                    </p>
                 </div>
                 <div class="col-md-4 mb-3">
                     <h5>Quick Links</h5>
@@ -146,15 +149,16 @@
                         <li><a href="#" class="text-white text-decoration-none">About Us</a></li>
                     </ul>
                 </div>
+
                 <div class="col-md-4 mb-3">
                     <h5>Follow Us</h5>
-                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="text-white fs-4 me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white fs-4 me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="bi bi-youtube"></i></a>
                 </div>
             </div>
             <hr class="border-light">
-            <p class="text-center mb-0">© 2025 EZone</p>
+            <p class="text-center mb-0">© 2025 @yield('company_name')</p>
         </div>
     </footer>
     <!-- Footer End -->

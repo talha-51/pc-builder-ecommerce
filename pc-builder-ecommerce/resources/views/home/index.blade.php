@@ -1,5 +1,35 @@
 @extends('layouts.frontend.master')
 
+@section('logo')
+    @if (!$settings)
+        <img src="{{ asset('images/logos/Image_not_available.png') }}" alt="logo" style="width: 150px; height: 70px;">
+    @else
+        <img src="{{ asset($settings->logo) }}" alt="logo" style="width: 150px; height: 70px;">
+    @endif
+@endsection
+
+
+@section('company_name')
+    @if (!$settings)
+    @else
+        {{ $settings->company_name }}
+    @endif
+@endsection
+
+@section('email')
+    @if (!$settings)
+    @else
+        {{ $settings->email }}
+    @endif
+@endsection
+
+@section('contact_no')
+    @if (!$settings)
+    @else
+        {{ $settings->contact_no }}
+    @endif
+@endsection
+
 @section('content')
     <!-- Side Navbar Start -->
     <div class="container-fluid row">
@@ -52,7 +82,6 @@
                         @endforeach
                     </div>
 
-                    <!-- Controls -->
                     <!-- Previous -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="prev">
