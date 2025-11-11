@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2025 at 11:44 AM
+-- Generation Time: Nov 11, 2025 at 07:15 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,8 +43,8 @@ INSERT INTO `brands` (`id`, `name`, `image`, `added_by_id`, `updated_by_id`) VAL
 (1, 'Intel', 'images/brands/1762680246.jpg', 1, NULL),
 (2, 'AMD', 'images/brands/1762680289.jpg', 1, NULL),
 (3, 'Nvidia', 'images/brands/1762680339.jpg', 1, NULL),
-(4, 'MSI', 'images/brands/1762680359.jpg', 1, NULL),
-(6, 'HP', 'images/brands/1762681068.jpg', 1, NULL);
+(4, 'MSI', 'images/brands/1762680359.jpg', 1, 2),
+(6, 'HP', 'images/brands/1762681068.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -268,7 +268,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('dVaW3ycrqvN6sE7pdOANWDJVjB4ddfYcgFnKyR2f', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMnc0S3c5NjBESFV2OHlnekcwbDB4dnFSM1RtMnY3MWlzS1lNRjl0MyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czoxMDoiaG9tZS5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1762683911);
+('awKYGz9CTGau9ovatuRIZecmerFqsidKcWrngl4b', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiV2htSFFoazVrdkF2WTBlSTFnQndCdnlkR0xsSEk0QVdYQkpJckp6MSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czoxMDoiaG9tZS5pbmRleCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1762841569);
 
 -- --------------------------------------------------------
 
@@ -284,6 +284,14 @@ CREATE TABLE `settings` (
   `email` varchar(255) NOT NULL,
   `contact_no` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `logo`, `favicon`, `company_name`, `email`, `contact_no`) VALUES
+(4, 'images/logos/1762838609.png', 'asd', 'EZone', 'ezone@gmail.com', '+8801212121212'),
+(5, 'images/logos/1762838712.png', 'qqq', 'RM IT BD', 'rmitbd@gmail.com', '+8801234343434');
 
 -- --------------------------------------------------------
 
@@ -331,15 +339,15 @@ CREATE TABLE `sub_categories` (
 --
 
 INSERT INTO `sub_categories` (`id`, `cat_id`, `name`, `image`, `added_by_id`, `updated_by_id`) VALUES
-(3, 1, 'CPU', 'images/sub-categories/1762683327.jpg', 2, 1),
-(4, 1, 'GPU', 'images/sub-categories/1762683341.jpg', 2, 1),
-(5, 1, 'Motherboard', 'images/sub-categories/1762683352.jpg', 2, 1),
-(6, 2, 'Mouse', 'images/sub-categories/1762604982.jpg', 2, NULL),
-(7, 2, 'Keyboard', 'images/sub-categories/1762604992.jpg', 2, NULL),
-(8, 2, 'Headphone', 'images/sub-categories/1762605009.jpg', 2, NULL),
-(9, 5, 'Router', 'images/sub-categories/1762605019.jpg', 2, 2),
-(10, 5, 'ONU', 'images/sub-categories/1762605028.jpg', 2, NULL),
-(11, 5, 'Starlink', 'images/sub-categories/1762605045.jpg', 2, 1);
+(3, 1, 'CPU', 'images/sub-categories/1762767928.jpg', 2, 2),
+(4, 1, 'GPU', 'images/sub-categories/1762767941.jpg', 2, 2),
+(5, 1, 'Motherboard', 'images/sub-categories/1762767952.png', 2, 2),
+(6, 2, 'Mouse', 'images/sub-categories/1762767968.png', 2, 2),
+(7, 2, 'Keyboard', 'images/sub-categories/1762767976.jpg', 2, 2),
+(8, 2, 'Headphone', 'images/sub-categories/1762767987.png', 2, 2),
+(9, 5, 'Router', 'images/sub-categories/1762767997.jpg', 2, 2),
+(10, 5, 'ONU', 'images/sub-categories/1762768036.webp', 2, 2),
+(11, 5, 'Starlink', 'images/sub-categories/1762768043.jpg', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -363,7 +371,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$cOg9FZNBGD5Qfqx.b5vM3ui3jmniPbIHvOvxZFkpvgyuoQktHM4tK', 'qsawv6AMw9ZO4zhJoNWYfvJOHsPAL14y3uGrrvLlQCNkZVtElFQVIDJQiaze', '2025-11-04 01:30:58', '2025-11-04 02:35:04'),
+(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$cOg9FZNBGD5Qfqx.b5vM3ui3jmniPbIHvOvxZFkpvgyuoQktHM4tK', 'eUudqPDtTO9pZ69olU7IvH36Y4RH7p8dwZYPlWXb9NBSGfJVOOV0DW7Z0gV7', '2025-11-04 01:30:58', '2025-11-04 02:35:04'),
 (2, 'user', 'user@gmail.com', NULL, '$2y$12$iXAud1nB3DAYgR7WU6JJIeWHj7aqkTWFeAU6br639mC82sQ035K4O', NULL, '2025-11-05 00:33:23', '2025-11-05 00:33:23');
 
 --
@@ -479,7 +487,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -509,7 +517,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sliders`

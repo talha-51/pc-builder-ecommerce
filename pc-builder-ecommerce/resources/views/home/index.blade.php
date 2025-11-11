@@ -7,43 +7,13 @@
     @endif
 @endsection
 
-@section('logo')
-    @if (!$settings)
-        <img src="{{ asset('images/logos/Image_not_available.png') }}" alt="logo" style="width: 150px; height: 70px;">
-    @else
-        <img src="{{ asset($settings->logo) }}" alt="logo" style="width: 150px; height: 70px;">
-    @endif
-@endsection
-
-
-@section('company_name')
-    @if (!$settings)
-    @else
-        {{ $settings->company_name }}
-    @endif
-@endsection
-
-@section('email')
-    @if (!$settings)
-    @else
-        {{ $settings->email }}
-    @endif
-@endsection
-
-@section('contact_no')
-    @if (!$settings)
-    @else
-        {{ $settings->contact_no }}
-    @endif
-@endsection
-
 @section('content')
-    <!-- Side Navbar Start -->
     <div class="container-fluid row">
+        <!-- Side Navbar Start -->
         <div class="col-2">
             @foreach ($categories as $category)
                 <div class="btn-group dropend d-block mt-1">
-                    <a href="{{ route('home.filteredByCategoryProducts', ['name' => $category->name, 'id' => $category->id]) }}"
+                    <a href="{{ route('home.filteredByCategoryProducts', str_replace(' ', '-', $category->name)) }}"
                         class="btn btn-dark dropdown-toggle w-100 category-btn" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         {{ $category->name }}
@@ -52,7 +22,7 @@
                         @foreach ($subcategories->where('cat_id', $category->id) as $subcategory)
                             <li>
                                 <a class="dropdown-item"
-                                    href="{{ route('home.filteredBySubCategoryProducts', ['sub' => $subcategory->name, 'id' => $subcategory->id]) }}">
+                                    href="{{ route('home.filteredBySubCategoryProducts', str_replace(' ', '-', $subcategory->name)) }}">
                                     {{ $subcategory->name }}
                                 </a>
                             </li>
@@ -61,8 +31,6 @@
                 </div>
             @endforeach
         </div>
-
-
         <!-- Side Navbar End -->
 
         <!-- Hero Carousel Start -->
@@ -90,7 +58,7 @@
                     <!-- Dynamic slides -->
                     <div class="carousel-inner">
                         @foreach ($sliders as $key => $slider)
-                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" data-bs-interval="2000">
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" data-bs-interval="3000">
                                 <img src="{{ asset($slider->image) }}" class="d-block w-100 img-fluid object-fit-contain"
                                     alt="Slider image" style="max-height: 80vh;" />
                             </div>

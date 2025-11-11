@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
+    protected $settings;
+
+    public function __construct()
+    {
+        $this->settings = DB::table('settings')->first();
+        // $this->settings = DB::table('settings')->orderBy('id', 'desc')->first();
+
+        // Share it with all views returned by this controller
+        View::share('settings', $this->settings);
+    }
+
     public function index()
     {
         $sliders = DB::table('sliders')->get();
@@ -14,30 +27,32 @@ class HomeController extends Controller
         $subcategories = DB::table('sub_categories')->get();
         $products = DB::table('products')->get();
         $brands = DB::table('brands')->get();
-        $settings = DB::table('settings')->first();
-        // $settings = DB::table('settings')->orderBy('id', 'desc')->first();
 
-        return view('home.index', compact('sliders', 'categories', 'subcategories','products','brands', 'settings'));
+        return view('home.index', compact('sliders', 'categories', 'subcategories', 'products', 'brands'));
     }
 
-    public function filteredByCategoryProducts($name, $id)
+    public function filteredByCategoryProducts($name)
     {
-        $categories = DB::table('categories')->where('id', $id)->first();
+        $name = Str::of($name)->replace('-', ' ');
+
+        $category = DB::table('categories')->where('name', $name)->first();
         $subcategories = DB::table('sub_categories')->get();
-        $settings = DB::table('settings')->first();
 
-        $filteredByCategoryProducts = DB::table('products')->where('cat_id', $id)->get();
+        $filteredByCategoryProducts = DB::table('products')
+            ->where('cat_id', $category->id)
+            ->get();
 
-        return view('home.filteredByCategoryProducts', compact('categories', 'subcategories', 'settings' ,'filteredByCategoryProducts'));
+        return view('home.filteredByCategoryProducts', compact('category', 'subcategories', 'filteredByCategoryProducts'));
     }
 
-    public function filteredBySubCategoryProducts($sub, $id)
+    public function filteredBySubCategoryProducts($name)
     {
-        $subcategories = DB::table('sub_categories')->where('id', $id)->first();
-        $settings = DB::table('settings')->first();
+        $subcategory = DB::table('sub_categories')->where('name', $name)->first();
 
-        $filteredBySubCategoryProducts = DB::table('products')->where('sub_id', $id)->get();
+        $filteredBySubCategoryProducts = DB::table('products')
+            ->where('sub_id', $subcategory->id)
+            ->get();
 
-        return view('home.filteredBySubCategoryProducts', compact('subcategories', 'settings' ,'filteredBySubCategoryProducts'));
+        return view('home.filteredBySubCategoryProducts', compact('subcategory', 'filteredBySubCategoryProducts'));
     }
 }

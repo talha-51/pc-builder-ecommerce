@@ -1,37 +1,7 @@
 @extends('layouts.frontend.master')
 
 @section('title')
-    {{ $categories->name }}
-@endsection
-
-@section('logo')
-    @if (!$settings)
-        <img src="{{ asset('images/logos/Image_not_available.png') }}" alt="logo" style="width: 150px; height: 70px;">
-    @else
-        <img src="{{ asset($settings->logo) }}" alt="logo" style="width: 150px; height: 70px;">
-    @endif
-@endsection
-
-
-@section('company_name')
-    @if (!$settings)
-    @else
-        {{ $settings->company_name }}
-    @endif
-@endsection
-
-@section('email')
-    @if (!$settings)
-    @else
-        {{ $settings->email }}
-    @endif
-@endsection
-
-@section('contact_no')
-    @if (!$settings)
-    @else
-        {{ $settings->contact_no }}
-    @endif
+    {{ $category->name }}
 @endsection
 
 @section('content')
@@ -43,7 +13,7 @@
         <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="220px">
             <div class="d-flex">
                 @foreach ($subcategories as $subcategory)
-                    <a href="{{ route('home.filteredBySubCategoryProducts', ['sub' => $subcategory->name, 'id' => $subcategory->id]) }}"
+                    <a href="{{ route('home.filteredBySubCategoryProducts', str_replace(' ', '-', $subcategory->name)) }}"
                         class="text-decoration-none">
                         <div class="text-center mx-4">
                             <img src="{{ asset($subcategory->image) }}" alt="{{ $subcategory->name }}"
@@ -60,7 +30,7 @@
 
 
     <div class="container text-center mb-5">
-        <h1 class="mb-4">{{ $categories->name }}</h1>
+        <h1 class="mb-5">{{ $category->name }}</h1>
 
         <div class="row">
             @foreach ($filteredByCategoryProducts as $product)

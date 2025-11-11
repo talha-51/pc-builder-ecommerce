@@ -86,7 +86,14 @@
     <!-- Top Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('home.index') }}">@yield('logo')</a>
+            <a class="navbar-brand" href="{{ route('home.index') }}">
+                @if (!$settings)
+                    <img src="{{ asset('images/logos/Image_not_available.png') }}" alt="logo"
+                        style="width: 150px; height: 70px;">
+                @else
+                    <img src="{{ asset($settings->logo) }}" alt="logo" style="width: 150px; height: 70px;">
+                @endif
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -135,10 +142,25 @@
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <h5>About Us</h5>
-                    <p>We provide high-quality computer components and accessories under the brand @yield('company_name')</p>
+                    <p>We provide high-quality computer components and accessories under the brand
+                        @if (!$settings)
+                        @else
+                            {{ $settings->company_name }}
+                        @endif
+                    </p>
                     <p>
-                        Email: @yield('email')<br>
-                        <i class="bi bi-telephone">@yield('contact_no')</i>
+                        Email:
+                        @if (!$settings)
+                        @else
+                            {{ $settings->email }}
+                        @endif
+                        <br>
+                        <i class="bi bi-telephone">
+                            @if (!$settings)
+                            @else
+                                {{ $settings->contact_no }}
+                            @endif
+                        </i>
                     </p>
                 </div>
                 <div class="col-md-4 mb-3">
@@ -158,7 +180,12 @@
                 </div>
             </div>
             <hr class="border-light">
-            <p class="text-center mb-0">© 2025 @yield('company_name')</p>
+            <p class="text-center mb-0">&copy; {{ date('Y') }}
+                @if (!$settings)
+                @else
+                    {{ $settings->company_name }}
+                @endif
+            </p>
         </div>
     </footer>
     <!-- Footer End -->
@@ -197,23 +224,6 @@
 
         });
     </script>
-
-    {{-- <script>
-        document.querySelectorAll('.dropend').forEach(function(dropdown) {
-            dropdown.addEventListener('mouseenter', function() {
-                const button = this.querySelector('.dropdown-toggle');
-                const menu = this.querySelector('.dropdown-menu');
-                const bsDropdown = new bootstrap.Dropdown(button);
-                bsDropdown.show();
-            });
-            dropdown.addEventListener('mouseleave', function() {
-                const button = this.querySelector('.dropdown-toggle');
-                const menu = this.querySelector('.dropdown-menu');
-                const bsDropdown = new bootstrap.Dropdown(button);
-                bsDropdown.hide();
-            });
-        });
-    </script> --}}
     <!-- Js for sidenav hover effect End -->
 
 
