@@ -100,9 +100,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fs-5">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Services</a>
+                        <a class="nav-link" aria-current="page" href="#">Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Projects</a>
@@ -112,7 +112,7 @@
                             aria-expanded="false">
                             About Us
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu fs-5">
                             <li><a class="dropdown-item" href="#">Contact Us</a></li>
                             <li><a class="dropdown-item" href="#">Meet The Team</a></li>
                             <li>

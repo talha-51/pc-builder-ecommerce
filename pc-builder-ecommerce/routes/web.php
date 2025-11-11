@@ -11,23 +11,14 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubCategoryController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/category/{name}', [HomeController::class, 'filteredByCategoryProducts'])->name('home.filteredByCategoryProducts');
 Route::get('/sub-category/{name}/', [HomeController::class, 'filteredBySubCategoryProducts'])->name('home.filteredBySubCategoryProducts');
+Route::get('/brand/{name}/', [HomeController::class, 'filteredByBrandProducts'])->name('home.filteredByBrandProducts');
 
-
-
-
-
-
-// Route::get('/dashboard', function () {
-
-//     return view('admin.dashboard');
-// })->middleware(['auth'])->name('admin.index');
 
 
 Route::middleware('auth')->group(function () {

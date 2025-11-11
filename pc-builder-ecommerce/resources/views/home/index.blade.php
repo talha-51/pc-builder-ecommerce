@@ -94,7 +94,7 @@
         <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="220px">
             <div class="d-flex">
                 @foreach ($categories as $category)
-                    <a href="{{ route('home.filteredByCategoryProducts', ['name' => $category->name, 'id' => $category->id]) }}"
+                    <a href="{{ route('home.filteredByCategoryProducts', str_replace(' ', '-', $category->name)) }}"
                         class="text-decoration-none">
                         <div class="text-center mx-4">
                             <img src="{{ asset($category->image) }}" alt="{{ $category->name }}"
@@ -150,11 +150,14 @@
         <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="220px">
             <div class="d-flex">
                 @foreach ($brands as $brand)
-                    <div class="text-center mx-4">
-                        <img src="{{ $brand->image }}" class="img-thumbnail rounded-circle object-fit-cover mb-2"
-                            style="width: 150px; height: 150px;">
-                        <div class="fw-bold fs-5 text-dark">{{ $brand->name }}</div>
-                    </div>
+                    <a href="{{ route('home.filteredByBrandProducts', str_replace(' ', '-', $brand->name)) }}"
+                        class="text-decoration-none">
+                        <div class="text-center mx-4">
+                            <img src="{{ $brand->image }}" class="img-thumbnail rounded-circle object-fit-cover mb-2"
+                                style="width: 150px; height: 150px;">
+                            <div class="fw-bold fs-5 text-dark">{{ $brand->name }}</div>
+                        </div>
+                    </a>
                 @endforeach
             </div>
         </marquee>

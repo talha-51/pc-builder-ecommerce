@@ -84,6 +84,15 @@
                             </select>
                         </div>
 
+                        <div class="form-group mb-3">
+                            <label for="brand_name" class="form-label">Brand Name</label>
+                            <select class="form-select" name="brand_id" aria-label="Default select example">
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('product.index') }}" class="btn btn-secondary">Back</a>
                             <button type="submit" class="btn btn-primary">Update</button>

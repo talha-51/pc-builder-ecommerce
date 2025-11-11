@@ -55,26 +55,20 @@
                 </tr>
             </tfoot>
             <tbody>
-                @foreach ($settings as $setting)
-                    <tr>
-                        <td>{{ $setting->id }}</td>
-                        <td>
-                            <img src="{{ asset($setting->logo) }}" alt="logo" class="img-thumbnail" width="75">
-                        </td>
-                        <td>{{ $setting->favicon }}</td>
-                        <td>{{ $setting->company_name }}</td>
-                        <td>{{ $setting->email }}</td>
-                        <td>{{ $setting->contact_no }}</td>
-                        <td>
-                            <a href="{{ route('settings.edit', $setting->id) }}"><button
-                                    class="btn btn-outline-warning">Edit</button></a>
-                            <form action="{{ route('settings.destroy', $setting->id) }}" method="POST" class="d-inline">
-                                @csrf @method('delete')
-                                <button type="submit" class="btn btn-outline-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                <tr>
+                    <td>{{ $setting->id }}</td>
+                    <td>
+                        <img src="{{ asset($setting->logo) }}" alt="logo" class="img-thumbnail" width="75">
+                    </td>
+                    <td>{{ $setting->favicon }}</td>
+                    <td>{{ $setting->company_name }}</td>
+                    <td>{{ $setting->email }}</td>
+                    <td>{{ $setting->contact_no }}</td>
+                    <td>
+                        <a href="{{ route('settings.edit', $setting->id) }}"><button
+                                class="btn btn-outline-warning">Edit</button></a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

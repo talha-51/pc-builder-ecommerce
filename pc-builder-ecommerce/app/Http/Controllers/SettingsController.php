@@ -13,9 +13,9 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settings = DB::table('settings')->get();
+        $data['setting'] = DB::table('settings')->first();
 
-        return view('admin.settings.index')->with('settings', $settings);
+        return view('admin.settings.index', $data);
     }
 
     /**

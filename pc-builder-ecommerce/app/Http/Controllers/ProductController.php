@@ -17,9 +17,10 @@ class ProductController extends Controller
         $products = DB::table('products')->get();
         $categories = DB::table('categories')->get();
         $subcategories = DB::table('sub_categories')->get();
+        $brands = DB::table('brands')->get();
         $users = DB::table('users')->select('id', 'name')->get();
 
-        return view('admin.product.index', compact('subcategories', 'categories', 'products', 'users'));
+        return view('admin.product.index', compact('subcategories', 'categories', 'products', 'users', 'brands'));
     }
 
     /**
@@ -54,6 +55,7 @@ class ProductController extends Controller
             'image' => $path . $img,
             'cat_id' => $request->cat_id,
             'sub_id' => $request->sub_id,
+            'brand_id' => $request->brand_id,
             'added_by_id' => Auth::user()->id
         ]);
 
@@ -78,8 +80,9 @@ class ProductController extends Controller
         $product = DB::table('products')->where('id', $id)->first();
         $categories = DB::table('categories')->get();
         $subcategories = DB::table('sub_categories')->get();
+        $brands = DB::table('brands')->get();
 
-        return view('admin.product.edit', compact('categories', 'subcategories', 'product'));
+        return view('admin.product.edit', compact('categories', 'subcategories', 'product', 'brands'));
     }
 
     /**
@@ -120,6 +123,7 @@ class ProductController extends Controller
                 'image' => $path . $img,
                 'cat_id' => $request->cat_id,
                 'sub_id' => $request->sub_id,
+                'brand_id' => $request->brand_id,
                 'updated_by_id' => Auth::user()->id
             ]);
 
@@ -133,6 +137,7 @@ class ProductController extends Controller
                 'quantity' => $request->quantity,
                 'cat_id' => $request->cat_id,
                 'sub_id' => $request->sub_id,
+                'brand_id' => $request->brand_id,
                 'updated_by_id' => Auth::user()->id
             ]);
         }

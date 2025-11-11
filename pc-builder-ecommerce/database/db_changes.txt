@@ -1,0 +1,1 @@
+ALTER TABLE `products` ADD `brand_id` BIGINT UNSIGNED NULL DEFAULT NULL AFTER `sub_id`;

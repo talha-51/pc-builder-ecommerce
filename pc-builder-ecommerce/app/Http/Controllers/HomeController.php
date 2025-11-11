@@ -55,4 +55,15 @@ class HomeController extends Controller
 
         return view('home.filteredBySubCategoryProducts', compact('subcategory', 'filteredBySubCategoryProducts'));
     }
+
+    public function filteredByBrandProducts($name)
+    {
+        $brand = DB::table('brands')->where('name', $name)->first();
+
+        $filteredByBrandProducts = DB::table('products')
+            ->where('brand_id', $brand->id)
+            ->get();
+
+        return view('home.filteredByBrandProducts', compact('brand', 'filteredByBrandProducts'));
+    }
 }

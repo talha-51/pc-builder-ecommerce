@@ -1,15 +1,15 @@
 @extends('layouts.frontend.master')
 
 @section('title')
-    {{ $subcategory->name }}
+    {{ $brand->name }}
 @endsection
 
 @section('content')
     <div class="container text-center mt-4 mb-5">
-        <h1 class="mb-5">{{ $subcategory->name }}</h1>
+        <h1 class="mb-5">{{ $brand->name }}</h1>
 
         <div class="row">
-            @foreach ($filteredBySubCategoryProducts as $product)
+            @foreach ($filteredByBrandProducts as $product)
                 <div class="col-md-3 mb-3">
                     <div class="card h-100">
                         <img src="{{ asset($product->image) }}" class="card-img-top" alt="{{ $product->name }}">

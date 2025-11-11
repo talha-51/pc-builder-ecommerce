@@ -41,6 +41,7 @@
                     <th>Image</th>
                     <th>Category Name</th>
                     <th>Sub-Category Name</th>
+                    <th>Brand Name</th>
                     <th>Added By</th>
                     <th>Updated By</th>
                     <th>Action</th>
@@ -55,6 +56,7 @@
                     <th>Image</th>
                     <th>Category Name</th>
                     <th>Sub-Category Name</th>
+                    <th>Brand Name</th>
                     <th>Added By</th>
                     <th>Updated By</th>
                     <th>Action</th>
@@ -73,9 +75,11 @@
                         </td>
                         <td>{{ optional($categories->firstWhere('id', $product->cat_id))->name }}</td>
                         <td>{{ optional($subcategories->firstWhere('id', $product->sub_id))->name }}</td>
+                        <td>{{ optional($brands->firstWhere('id', $product->brand_id))->name }}</td>
                         <td>{{ optional($users->firstWhere('id', $product->added_by_id))->name }}</td>
                         <td>{{ optional($users->firstWhere('id', $product->updated_by_id))->name }}</td>
-                        {{-- <td>{{ $product->cat_id }}</td>
+                        {{-- <td>{{ $product->brand_id }}</td>
+                        <td>{{ $product->cat_id }}</td>
                         <td>{{ $product->sub_id }}</td>
                         <td>{{ $product->added_by_id }}</td>
                         <td>{{ $product->updated_by_id }}</td> --}}
@@ -152,6 +156,15 @@
                             <select class="form-select" name="sub_id" aria-label="Default select example">
                                 @foreach ($subcategories as $subcategory)
                                     <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="brand_name" class="form-label">Brand Name</label>
+                            <select class="form-select" name="brand_id" aria-label="Default select example">
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                 @endforeach
                             </select>
                         </div>

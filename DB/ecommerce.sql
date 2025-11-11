@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2025 at 07:15 AM
+-- Generation Time: Nov 11, 2025 at 10:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `brands` (
 INSERT INTO `brands` (`id`, `name`, `image`, `added_by_id`, `updated_by_id`) VALUES
 (1, 'Intel', 'images/brands/1762680246.jpg', 1, NULL),
 (2, 'AMD', 'images/brands/1762680289.jpg', 1, NULL),
-(3, 'Nvidia', 'images/brands/1762680339.jpg', 1, NULL),
+(3, 'Nvidia', 'images/brands/1762680339.jpg', 1, 1),
 (4, 'MSI', 'images/brands/1762680359.jpg', 1, 2),
 (6, 'HP', 'images/brands/1762681068.jpg', 1, 1);
 
@@ -218,6 +218,7 @@ CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `cat_id` int(11) NOT NULL,
   `sub_id` int(11) NOT NULL,
+  `brand_id` bigint(20) UNSIGNED DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -230,23 +231,23 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `cat_id`, `sub_id`, `name`, `price`, `quantity`, `image`, `added_by_id`, `updated_by_id`) VALUES
-(2, 1, 3, 'Intel Core i7', '1000', 20, 'images/products/1762667442.jpg', 1, NULL),
-(3, 1, 3, 'Intel Core i5', '700', 75, 'images/products/1762667468.jpg', 1, NULL),
-(4, 1, 4, 'PNY RTX-5080', '800', 45, 'images/products/1762667558.jpg', 1, NULL),
-(5, 1, 4, 'Asus RTX-5070Ti', '550', 42, 'images/products/1762667613.png', 1, NULL),
-(6, 1, 3, 'Ryzen 5-9600x', '900', 84, 'images/products/1762667679.webp', 1, NULL),
-(8, 1, 5, 'MSI MPG-Z590', '670', 53, 'images/products/1762668206.png', 1, NULL),
-(9, 2, 6, 'Mouse 1', '750', 23, 'images/products/1762672776.png', 1, NULL),
-(10, 2, 6, 'Mouse 2', '450', 44, 'images/products/1762672828.webp', 1, NULL),
-(11, 2, 6, 'Mouse 3', '50', 28, 'images/products/1762672871.png', 1, NULL),
-(12, 2, 7, 'Keyboard 1', '200', 77, 'images/products/1762672898.jpg', 1, NULL),
-(13, 2, 8, 'Headphone 1', '770', 15, 'images/products/1762672935.png', 1, NULL),
-(14, 5, 9, 'Router 1', '100', 59, 'images/products/1762677599.jpg', 1, NULL),
-(15, 5, 9, 'Router 2', '350', 88, 'images/products/1762677630.jpg', 1, NULL),
-(16, 5, 9, 'Router 3', '580', 23, 'images/products/1762677682.jpg', 1, NULL),
-(17, 5, 10, 'ONU 1', '430', 33, 'images/products/1762677716.webp', 1, NULL),
-(19, 5, 11, 'Starlink', '999', 21, 'images/products/1762681631.jpg', 1, 1);
+INSERT INTO `products` (`id`, `cat_id`, `sub_id`, `brand_id`, `name`, `price`, `quantity`, `image`, `added_by_id`, `updated_by_id`) VALUES
+(2, 1, 3, 1, 'Intel Core i7', '1000', 20, 'images/products/1762667442.jpg', 1, 1),
+(3, 1, 3, 1, 'Intel Core i5', '700', 75, 'images/products/1762667468.jpg', 1, 1),
+(4, 1, 4, 3, 'PNY RTX-5080', '800', 45, 'images/products/1762667558.jpg', 1, 1),
+(5, 1, 4, 3, 'Asus RTX-5070Ti', '550', 42, 'images/products/1762667613.png', 1, 1),
+(6, 1, 3, 2, 'Ryzen 5-9600x', '900', 84, 'images/products/1762667679.webp', 1, 1),
+(8, 1, 5, 4, 'MSI MPG-Z590', '670', 53, 'images/products/1762668206.png', 1, 1),
+(9, 2, 6, 6, 'Mouse 1', '750', 23, 'images/products/1762672776.png', 1, 1),
+(10, 2, 6, 4, 'Mouse 2', '450', 44, 'images/products/1762672828.webp', 1, 1),
+(11, 2, 6, 6, 'Mouse 3', '50', 28, 'images/products/1762672871.png', 1, 1),
+(12, 2, 7, 4, 'Keyboard 1', '200', 77, 'images/products/1762672898.jpg', 1, 1),
+(13, 2, 8, 4, 'Headphone 1', '770', 15, 'images/products/1762672935.png', 1, 1),
+(14, 5, 9, 6, 'Router 1', '100', 59, 'images/products/1762677599.jpg', 1, 1),
+(15, 5, 9, 6, 'Router 2', '350', 88, 'images/products/1762677630.jpg', 1, 1),
+(16, 5, 9, 4, 'Router 3', '580', 23, 'images/products/1762677682.jpg', 1, 1),
+(17, 5, 10, 6, 'ONU 1', '430', 33, 'images/products/1762677716.webp', 1, 1),
+(19, 5, 11, 4, 'Starlink', '999', 21, 'images/products/1762681631.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -268,7 +269,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('awKYGz9CTGau9ovatuRIZecmerFqsidKcWrngl4b', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiV2htSFFoazVrdkF2WTBlSTFnQndCdnlkR0xsSEk0QVdYQkpJckp6MSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czoxMDoiaG9tZS5pbmRleCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1762841569);
+('awKYGz9CTGau9ovatuRIZecmerFqsidKcWrngl4b', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiV2htSFFoazVrdkF2WTBlSTFnQndCdnlkR0xsSEk0QVdYQkpJckp6MSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWN0IjtzOjU6InJvdXRlIjtzOjEzOiJwcm9kdWN0LmluZGV4Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1762854082);
 
 -- --------------------------------------------------------
 
@@ -290,8 +291,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `logo`, `favicon`, `company_name`, `email`, `contact_no`) VALUES
-(4, 'images/logos/1762838609.png', 'asd', 'EZone', 'ezone@gmail.com', '+8801212121212'),
-(5, 'images/logos/1762838712.png', 'qqq', 'RM IT BD', 'rmitbd@gmail.com', '+8801234343434');
+(4, 'images/logos/1762838609.png', 'asd update', 'EZone', 'ezone@gmail.com', '+8801212121212');
 
 -- --------------------------------------------------------
 
@@ -511,7 +511,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `settings`

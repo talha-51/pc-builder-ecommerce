@@ -20,11 +20,6 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="form-group mb-3">
-                            <label class="form-label">ID</label>
-                            <input type="text" readonly class="form-control" value="{{ $setting->id }}">
-                        </div>
-
                         @if ($setting->logo)
                             <div class="mb-3 text-center">
                                 <label class="form-label d-block">Current Logo</label>
@@ -68,8 +63,7 @@
 
                         <div class="form-group mb-3">
                             <label for="contact_no" class="form-label">Contact NO</label>
-                            <input type="text" name="contact_no" class="form-control"
-                                value="{{ $setting->contact_no }}">
+                            <input type="text" name="contact_no" class="form-control" value="{{ $setting->contact_no }}">
                             @error('contact_no')
                                 <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
                             @enderror

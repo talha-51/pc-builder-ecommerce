@@ -6,9 +6,9 @@
 
 @section('content')
     <!-- Sub-Catagories marquee Start -->
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-4">
         <div class="container-fluid text-center">
-            <h1>Sub-Categories</h1>
+            <h1 class="mb-5">Sub-Categories</h1>
         </div>
         <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="220px">
             <div class="d-flex">
