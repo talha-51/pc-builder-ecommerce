@@ -40,6 +40,9 @@
                     <th>Company Name</th>
                     <th>Email</th>
                     <th>Contact NO</th>
+                    <th>Facebook</th>
+                    <th>Instagram</th>
+                    <th>Youtube</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -51,6 +54,9 @@
                     <th>Company Name</th>
                     <th>Email</th>
                     <th>Contact NO</th>
+                    <th>Facebook</th>
+                    <th>Instagram</th>
+                    <th>Youtube</th>
                     <th>Action</th>
                 </tr>
             </tfoot>
@@ -64,6 +70,9 @@
                     <td>{{ $setting->company_name }}</td>
                     <td>{{ $setting->email }}</td>
                     <td>{{ $setting->contact_no }}</td>
+                    <td>{{ $setting->facebook }}</td>
+                    <td>{{ $setting->instagram }}</td>
+                    <td>{{ $setting->youtube }}</td>
                     <td>
                         <a href="{{ route('settings.edit', $setting->id) }}"><button
                                 class="btn btn-outline-warning">Edit</button></a>
@@ -123,6 +132,30 @@
                             <label for="contact_no" class="form-label">Contact NO</label>
                             <input type="text" name="contact_no" class="form-control" value="{{ old('contact_no') }}">
                             @error('contact_no')
+                                <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="facebook" class="form-label">Facebook Link</label>
+                            <input type="text" name="facebook" class="form-control" value="{{ old('facebook') }}">
+                            @error('facebook')
+                                <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="instagram" class="form-label">Instagram Link</label>
+                            <input type="text" name="instagram" class="form-control" value="{{ old('instagram') }}">
+                            @error('instagram')
+                                <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="youtube" class="form-label">Youtube Link</label>
+                            <input type="text" name="youtube" class="form-control" value="{{ old('youtube') }}">
+                            @error('youtube')
                                 <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
                             @enderror
                         </div>

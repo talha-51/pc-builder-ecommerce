@@ -37,6 +37,9 @@ class SettingsController extends Controller
             'company_name' => 'required|max:30',
             'email' => 'required|max:50',
             'contact_no' => 'required|max:20',
+            'facebook' => 'max:100',
+            'instagram' => 'max:100',
+            'youtube' => 'max:100'
         ]);
 
         $img = time() . '.' . $request->logo->getClientOriginalExtension();
@@ -47,6 +50,9 @@ class SettingsController extends Controller
             'company_name' => $request->company_name,
             'email' => $request->email,
             'contact_no' => $request->contact_no,
+            'facebook' => $request->facebook,
+            'instagram' => $request->instagram,
+            'youtube' => $request->youtube,
             'logo' => $path . $img
         ]);
 
@@ -84,6 +90,9 @@ class SettingsController extends Controller
             'company_name' => 'required|max:30',
             'email' => 'required|max:50',
             'contact_no' => 'required|max:20',
+            'facebook' => 'max:100',
+            'instagram' => 'max:100',
+            'youtube' => 'max:100'
         ]);
 
         if ($request->hasFile('logo')) {
@@ -108,6 +117,9 @@ class SettingsController extends Controller
                 'company_name' => $request->company_name,
                 'email' => $request->email,
                 'contact_no' => $request->contact_no,
+                'facebook' => $request->facebook,
+                'instagram' => $request->instagram,
+                'youtube' => $request->youtube,
                 'logo' => $path . $img,
             ]);
 
@@ -120,6 +132,9 @@ class SettingsController extends Controller
                 'company_name' => $request->company_name,
                 'email' => $request->email,
                 'contact_no' => $request->contact_no,
+                'facebook' => $request->facebook,
+                'instagram' => $request->instagram,
+                'youtube' => $request->youtube,
             ]);
         }
 

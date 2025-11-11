@@ -174,9 +174,12 @@
 
                 <div class="col-md-4 mb-3">
                     <h5>Follow Us</h5>
-                    <a href="#" class="text-white fs-4 me-3"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-white fs-4 me-3"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="text-white fs-4"><i class="bi bi-youtube"></i></a>
+                    <a href="@if (!$settings) # @else{{ $settings->facebook }} @endif"
+                        class="text-white fs-4 me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="@if (!$settings) # @else{{ $settings->instagram }} @endif"
+                        class="text-white fs-4 me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="@if (!$settings) # @else{{ $settings->youtube }} @endif"
+                        class="text-white fs-4"><i class="bi bi-youtube"></i></a>
                 </div>
             </div>
             <hr class="border-light">

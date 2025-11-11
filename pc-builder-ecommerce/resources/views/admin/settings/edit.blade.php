@@ -69,6 +69,30 @@
                             @enderror
                         </div>
 
+                        <div class="form-group mb-3">
+                            <label for="facebook" class="form-label">Facebook Link</label>
+                            <input type="text" name="facebook" class="form-control" value="{{ $setting->facebook }}">
+                            @error('facebook')
+                                <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="instagram" class="form-label">Instagram Link</label>
+                            <input type="text" name="instagram" class="form-control" value="{{ $setting->instagram }}">
+                            @error('instagram')
+                                <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="youtube" class="form-label">Youtube Link</label>
+                            <input type="text" name="youtube" class="form-control" value="{{ $setting->youtube }}">
+                            @error('youtube')
+                                <div class="alert alert-danger mt-2 text-center">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('settings.index') }}" class="btn btn-secondary">Back</a>
                             <button type="submit" class="btn btn-primary">Update</button>
