@@ -43,7 +43,22 @@
    composer install
    ```
    ```bash
+   npm install
+   ```
+   ```bash
    cp .env.example .env
    ```
-   Go inside the .env file and change the DB name to **ecommerce**
+   ```bash
+   php artisan key:generate
+   ```
+   ```bash
+   php artisan migrate
+   ```
+   ```bash
+   npm run dev
+   ```
+   ```bash
+   php artisan serve
+   ```
+   Go inside the .env file and change the DB name to **"ecommerce"**
    
