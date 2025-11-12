@@ -19,8 +19,17 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="{{ route('home.index') }}">
-            EZone
+        <a class="navbar-brand ps-3 mt-4" href="{{ route('home.index') }}">
+            @if (!$settings)
+                <img src="{{ asset('images/logos/Image_not_available.png') }}" alt="logo"
+                    style="width: 150px; height: 70px;">
+            @else
+                <img src="{{ asset($settings->logo) }}" alt="logo" style="width: 150px; height: 70px;">
+            @endif
+
+            {{-- @if (!$settings)
+                @else{{ $settings->company_name }}
+            @endif --}}
         </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
@@ -60,7 +69,7 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <div class="sb-sidenav-menu-heading mt-3">Core</div>
                         <a class="nav-link" href="{{ route('admin.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
@@ -139,7 +148,9 @@
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">
-                            Copyright &copy; EZone {{ date('Y') }}
+                            Copyright &copy; @if (!$settings)
+                                @else{{ $settings->company_name }}
+                            @endif {{ date('Y') }}
                         </div>
                         <div>
                             <a href="#">Privacy Policy</a>

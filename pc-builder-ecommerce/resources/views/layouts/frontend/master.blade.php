@@ -82,9 +82,9 @@
     </style>
 </head>
 
-<body>
+<body class="bg-info-subtle text-info-emphasis">
     <!-- Top Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-info-subtle text-info-emphasis">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('home.index') }}">
                 @if (!$settings)
@@ -144,21 +144,18 @@
                     <h5>About Us</h5>
                     <p>We provide high-quality computer components and accessories under the brand
                         @if (!$settings)
-                        @else
-                            {{ $settings->company_name }}
+                            @else{{ $settings->company_name }}
                         @endif
                     </p>
                     <p>
                         Email:
                         @if (!$settings)
-                        @else
-                            {{ $settings->email }}
+                            @else{{ $settings->email }}
                         @endif
                         <br>
                         <i class="bi bi-telephone">
                             @if (!$settings)
-                            @else
-                                {{ $settings->contact_no }}
+                                @else{{ $settings->contact_no }}
                             @endif
                         </i>
                     </p>
@@ -185,8 +182,7 @@
             <hr class="border-light">
             <p class="text-center mb-0">&copy; {{ date('Y') }}
                 @if (!$settings)
-                @else
-                    {{ $settings->company_name }}
+                    @else{{ $settings->company_name }}
                 @endif
             </p>
         </div>

@@ -5,20 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
-    protected $settings;
+    // protected $settings;
 
-    public function __construct()
-    {
-        $this->settings = DB::table('settings')->first();
-        // $this->settings = DB::table('settings')->orderBy('id', 'desc')->first();
+    // public function __construct()
+    // {
+    //     $this->settings = DB::table('settings')->first();
+    //     // $this->settings = DB::table('settings')->orderBy('id', 'desc')->first();
 
-        // Share it with all views returned by this controller
-        View::share('settings', $this->settings);
-    }
+    //     // Share it with all views returned by this controller
+    //     View::share('settings', $this->settings);
+    // }
 
     public function index()
     {
@@ -31,39 +30,112 @@ class HomeController extends Controller
         return view('home.index', compact('sliders', 'categories', 'subcategories', 'products', 'brands'));
     }
 
-    public function filteredByCategoryProducts($name)
+
+    // for individual page
+
+    // public function filteredByCategoryProducts($name)
+    // {
+    //     $name = Str::of($name)->replace('-', ' ');
+    //     $category = DB::table('categories')->where('name', $name)->first();
+    //     $subcategories = DB::table('sub_categories')->get();
+
+    //     $filteredByCategoryProducts = DB::table('products')
+    //         ->where('cat_id', $category->id)
+    //         ->get();
+
+    //     return view('home.filteredByCategoryProducts', compact('category', 'subcategories', 'filteredByCategoryProducts'));
+    // }
+
+    // public function filteredBySubCategoryProducts($name)
+    // {
+    //     $name = Str::of($name)->replace('-', ' ');
+    //     $subcategory = DB::table('sub_categories')->where('name', $name)->first();
+
+    //     $filteredBySubCategoryProducts = DB::table('products')
+    //         ->where('sub_id', $subcategory->id)
+    //         ->get();
+
+    //     return view('home.filteredBySubCategoryProducts', compact('subcategory', 'filteredBySubCategoryProducts'));
+    // }
+
+    // public function filteredByBrandProducts($name)
+    // {
+    //     $name = Str::of($name)->replace('-', ' ');
+    //     $brand = DB::table('brands')->where('name', $name)->first();
+
+    //     $filteredByBrandProducts = DB::table('products')
+    //         ->where('brand_id', $brand->id)
+    //         ->get();
+
+    //     return view('home.filteredByBrandProducts', compact('brand', 'filteredByBrandProducts'));
+    // }
+
+
+    // single page dynamic
+
+    public function filteredProducts($type, $name)
     {
+        // Convert hyphens back to spaces
         $name = Str::of($name)->replace('-', ' ');
 
-        $category = DB::table('categories')->where('name', $name)->first();
-        $subcategories = DB::table('sub_categories')->get();
+        $filteredProducts = collect();
+        $title = '';
+        $subcategories = collect();
+        $mainData = null; // will hold category / subcategory / brand info
 
-        $filteredByCategoryProducts = DB::table('products')
-            ->where('cat_id', $category->id)
-            ->get();
+        switch ($type) {
+            case 'category':
+                $mainData = DB::table('categories')->where('name', $name)->first();
+                if ($mainData) {
+                    $filteredProducts = DB::table('products')
+                        ->where('cat_id', $mainData->id)
+                        ->get();
 
-        return view('home.filteredByCategoryProducts', compact('category', 'subcategories', 'filteredByCategoryProducts'));
-    }
+                    // fetch subcategories for marquee
+                    $subcategories = DB::table('sub_categories')
+                        ->where('cat_id', $mainData->id)
+                        ->get();
 
-    public function filteredBySubCategoryProducts($name)
-    {
-        $subcategory = DB::table('sub_categories')->where('name', $name)->first();
+                    $title = $mainData->name;
+                }
+                break;
 
-        $filteredBySubCategoryProducts = DB::table('products')
-            ->where('sub_id', $subcategory->id)
-            ->get();
+            case 'sub-category':
+                $mainData = DB::table('sub_categories')->where('name', $name)->first();
+                if ($mainData) {
+                    $filteredProducts = DB::table('products')
+                        ->where('sub_id', $mainData->id)
+                        ->get();
 
-        return view('home.filteredBySubCategoryProducts', compact('subcategory', 'filteredBySubCategoryProducts'));
-    }
+                    $title = $mainData->name;
+                }
+                break;
 
-    public function filteredByBrandProducts($name)
-    {
-        $brand = DB::table('brands')->where('name', $name)->first();
+            case 'brand':
+                $mainData = DB::table('brands')->where('name', $name)->first();
+                if ($mainData) {
+                    $filteredProducts = DB::table('products')
+                        ->where('brand_id', $mainData->id)
+                        ->get();
 
-        $filteredByBrandProducts = DB::table('products')
-            ->where('brand_id', $brand->id)
-            ->get();
+                    $title = $mainData->name;
+                }
+                break;
 
-        return view('home.filteredByBrandProducts', compact('brand', 'filteredByBrandProducts'));
+            default:
+                abort(404);
+        }
+
+        if (!$mainData) {
+            abort(404);
+        }
+
+        return view('home.filteredProducts', compact(
+            'type',
+            'title',
+            'mainData',
+            'filteredProducts',
+            'subcategories'
+        ));
     }
 }

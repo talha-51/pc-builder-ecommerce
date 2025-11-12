@@ -15,9 +15,19 @@ use App\Http\Controllers\SubCategoryController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/category/{name}', [HomeController::class, 'filteredByCategoryProducts'])->name('home.filteredByCategoryProducts');
-Route::get('/sub-category/{name}/', [HomeController::class, 'filteredBySubCategoryProducts'])->name('home.filteredBySubCategoryProducts');
-Route::get('/brand/{name}/', [HomeController::class, 'filteredByBrandProducts'])->name('home.filteredByBrandProducts');
+
+// for individual page
+// Route::get('/category/{name}', [HomeController::class, 'filteredByCategoryProducts'])->name('home.filteredByCategoryProducts');
+// Route::get('/sub-category/{name}', [HomeController::class, 'filteredBySubCategoryProducts'])->name('home.filteredBySubCategoryProducts');
+// Route::get('/brand/{name}', [HomeController::class, 'filteredByBrandProducts'])->name('home.filteredByBrandProducts');
+
+
+// for single dynamic page
+Route::get('/{type}/{name}', [HomeController::class, 'filteredProducts'])
+    ->where('type', 'category|sub-category|brand')
+    ->name('home.filteredProducts');
+
+
 
 
 

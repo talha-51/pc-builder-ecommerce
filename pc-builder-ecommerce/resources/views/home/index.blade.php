@@ -13,18 +13,37 @@
         <div class="col-2">
             @foreach ($categories as $category)
                 <div class="btn-group dropend d-block mt-1">
-                    <a href="{{ route('home.filteredByCategoryProducts', str_replace(' ', '-', $category->name)) }}"
+                    {{-- for single dynamic page --}}
+
+                    <a href="{{ route('home.filteredProducts', ['type' => 'category', 'name' => str_replace(' ', '-', $category->name)]) }}"
                         class="btn btn-dark dropdown-toggle w-100 category-btn" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         {{ $category->name }}
                     </a>
+
+                    {{-- for individual page --}}
+
+                    {{-- <a href="{{ route('home.filteredByCategoryProducts', str_replace(' ', '-', $category->name)) }}"
+                        class="btn btn-dark dropdown-toggle w-100 category-btn" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ $category->name }}
+                    </a> --}}
                     <ul class="dropdown-menu">
                         @foreach ($subcategories->where('cat_id', $category->id) as $subcategory)
                             <li>
+                                {{-- for single dynamic page --}}
+
                                 <a class="dropdown-item"
-                                    href="{{ route('home.filteredBySubCategoryProducts', str_replace(' ', '-', $subcategory->name)) }}">
+                                    href="{{ route('home.filteredProducts', ['type' => 'sub-category', 'name' => str_replace(' ', '-', $subcategory->name)]) }}">
                                     {{ $subcategory->name }}
                                 </a>
+
+                                {{-- for individual page --}}
+
+                                {{-- <a class="dropdown-item"
+                                    href="{{ route('home.filteredBySubCategoryProducts', str_replace(' ', '-', $subcategory->name)) }}">
+                                    {{ $subcategory->name }}
+                                </a> --}}
                             </li>
                         @endforeach
                     </ul>
@@ -94,7 +113,9 @@
         <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="220px">
             <div class="d-flex">
                 @foreach ($categories as $category)
-                    <a href="{{ route('home.filteredByCategoryProducts', str_replace(' ', '-', $category->name)) }}"
+                    {{-- for single dynamic page --}}
+
+                    <a href="{{ route('home.filteredProducts', ['type' => 'category', 'name' => str_replace(' ', '-', $category->name)]) }}"
                         class="text-decoration-none">
                         <div class="text-center mx-4">
                             <img src="{{ asset($category->image) }}" alt="{{ $category->name }}"
@@ -103,6 +124,18 @@
                             <div class="fw-bold fs-5 text-dark">{{ $category->name }}</div>
                         </div>
                     </a>
+
+                    {{-- for individual page --}}
+
+                    {{-- <a href="{{ route('home.filteredByCategoryProducts', str_replace(' ', '-', $category->name)) }}"
+                        class="text-decoration-none">
+                        <div class="text-center mx-4">
+                            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}"
+                                class="img-thumbnail rounded-circle object-fit-cover mb-2"
+                                style="width: 150px; height: 150px;">
+                            <div class="fw-bold fs-5 text-dark">{{ $category->name }}</div>
+                        </div>
+                    </a> --}}
                 @endforeach
             </div>
         </marquee>
@@ -122,7 +155,7 @@
                         @foreach ($products->where('cat_id', $category->id) as $product)
                             <div class="product-card">
                                 <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
-                                <div class="card-body bg-light">
+                                <div class="card-body bg-primary-subtle text-primary-emphasis">
                                     <h5 class="card-title">{{ $product->name }}</h5>
                                     <p class="card-text">{{ $product->price }}</p>
                                     <div class="text-center">
@@ -150,7 +183,9 @@
         <marquee class="mt-2" scrollamount="10" width="100%" direction="left" height="220px">
             <div class="d-flex">
                 @foreach ($brands as $brand)
-                    <a href="{{ route('home.filteredByBrandProducts', str_replace(' ', '-', $brand->name)) }}"
+                    {{-- for single dynamic page --}}
+
+                    <a href="{{ route('home.filteredProducts', ['type' => 'brand', 'name' => str_replace(' ', '-', $brand->name)]) }}"
                         class="text-decoration-none">
                         <div class="text-center mx-4">
                             <img src="{{ $brand->image }}" class="img-thumbnail rounded-circle object-fit-cover mb-2"
@@ -158,6 +193,17 @@
                             <div class="fw-bold fs-5 text-dark">{{ $brand->name }}</div>
                         </div>
                     </a>
+
+                    {{-- for individual page --}}
+
+                    {{-- <a href="{{ route('home.filteredByBrandProducts', str_replace(' ', '-', $brand->name)) }}"
+                        class="text-decoration-none">
+                        <div class="text-center mx-4">
+                            <img src="{{ $brand->image }}" class="img-thumbnail rounded-circle object-fit-cover mb-2"
+                                style="width: 150px; height: 150px;">
+                            <div class="fw-bold fs-5 text-dark">{{ $brand->name }}</div>
+                        </div>
+                    </a> --}}
                 @endforeach
             </div>
         </marquee>
