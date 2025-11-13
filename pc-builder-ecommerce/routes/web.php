@@ -8,6 +8,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubCategoryController;
 
@@ -34,6 +35,10 @@ Route::get('/{type}/{name}', [HomeController::class, 'filteredProducts'])
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/user-list', [AdminController::class, 'userList'])->name('admin.userList');
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'confirmOrder'])->name('checkout.confirmOrder');
+    Route::post('/checkout/add-to-cart/{id}', [CheckoutController::class, 'addToCart'])->name('checkout.addToCart');
 
     // Resource Controllers
     Route::resource('slider', SliderController::class);

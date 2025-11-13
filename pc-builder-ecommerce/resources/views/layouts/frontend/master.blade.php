@@ -79,12 +79,17 @@
                 flex: 0 0 100%;
             }
         }
+
+        /* alert */
+        #flashAlert {
+            transition: opacity 0.5s ease-in-out;
+        }
     </style>
 </head>
 
 <body class="bg-info-subtle text-info-emphasis">
     <!-- Top Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-info-subtle text-info-emphasis">
+    <nav class="navbar navbar-expand-lg bg-info text-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('home.index') }}">
                 @if (!$settings)
@@ -122,9 +127,24 @@
                     </li>
                 </ul>
                 @auth
-                    <a href="{{ route('admin.index') }}"><button class="btn btn-outline-primary">Dashboard</button></a>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="{{ route('checkout.index') }}" class="position-relative">
+                            <button class="btn btn-success position-relative">
+                                Cart
+                                @if (isset($cartCount) && $cartCount > 0)
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ $cartCount }}
+                                    </span>
+                                @endif
+                            </button>
+                        </a>
+                        <a href="{{ route('admin.index') }}">
+                            <button class="btn btn-primary">Dashboard</button>
+                        </a>
+                    </div>
                 @else
-                    <a href="{{ route('login') }}"><button class="btn btn-outline-primary">Login</button></a>
+                    <a href="{{ route('login') }}"><button class="btn btn-primary">Login</button></a>
                 @endauth
             </div>
         </div>
@@ -172,11 +192,11 @@
                 <div class="col-md-4 mb-3">
                     <h5>Follow Us</h5>
                     <a href="@if (!$settings) # @else{{ $settings->facebook }} @endif"
-                        class="text-white fs-4 me-3"><i class="bi bi-facebook"></i></a>
+                        class="text-white fs-4 me-3" target="_blank"><i class="bi bi-facebook"></i></a>
                     <a href="@if (!$settings) # @else{{ $settings->instagram }} @endif"
-                        class="text-white fs-4 me-3"><i class="bi bi-instagram"></i></a>
+                        class="text-white fs-4 me-3" target="_blank"><i class="bi bi-instagram"></i></a>
                     <a href="@if (!$settings) # @else{{ $settings->youtube }} @endif"
-                        class="text-white fs-4"><i class="bi bi-youtube"></i></a>
+                        class="text-white fs-4" target="_blank"><i class="bi bi-youtube"></i></a>
                 </div>
             </div>
             <hr class="border-light">
@@ -269,6 +289,21 @@
         });
     </script>
     <!-- Js for Card Carousel End -->
+
+    {{-- Js for alert Start --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alert = document.getElementById('flashAlert');
+            if (alert) {
+                setTimeout(() => {
+                    alert.classList.remove('show');
+                    alert.classList.add('fade');
+                    setTimeout(() => alert.remove(), 500);
+                }, 3000);
+            }
+        });
+    </script>
+    {{-- Js for alert End --}}
 
 </body>
 

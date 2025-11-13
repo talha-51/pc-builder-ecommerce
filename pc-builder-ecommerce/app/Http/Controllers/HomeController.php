@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,8 +27,11 @@ class HomeController extends Controller
         $subcategories = DB::table('sub_categories')->get();
         $products = DB::table('products')->get();
         $brands = DB::table('brands')->get();
+        // Example in your controller (like HomeController or master layout composer)
+        $cartCount = DB::table('carts')->where('user_id', Auth::id())->count();
 
-        return view('home.index', compact('sliders', 'categories', 'subcategories', 'products', 'brands'));
+
+        return view('home.index', compact('sliders', 'categories', 'subcategories', 'products', 'brands', 'cartCount'));
     }
 
 
@@ -77,11 +81,15 @@ class HomeController extends Controller
     {
         // Convert hyphens back to spaces
         $name = Str::of($name)->replace('-', ' ');
+        $cartCount = DB::table('carts')->where('user_id', Auth::id())->count();
 
         $filteredProducts = collect();
         $title = '';
         $subcategories = collect();
         $mainData = null; // will hold category / subcategory / brand info
+
+        // will work evenif above 4-lines are commented if below 1 line is uncommented (all for the return view parameters)
+        // $subcategories = '';
 
         switch ($type) {
             case 'category':
@@ -135,7 +143,8 @@ class HomeController extends Controller
             'title',
             'mainData',
             'filteredProducts',
-            'subcategories'
+            'subcategories',
+            'cartCount'
         ));
     }
 }

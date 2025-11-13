@@ -8,6 +8,24 @@
 @endsection
 
 @section('content')
+
+    {{-- alert --}}
+    @if (session('success'))
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1055; margin-top: 70px;">
+            <div class="alert alert-success alert-dismissible fade show shadow" role="alert" id="flashAlert">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1055; margin-top: 70px;">
+            <div class="alert alert-danger alert-dismissible fade show shadow" role="alert" id="flashAlert">
+                {{ session('error') }}
+            </div>
+        </div>
+    @endif
+
     <div class="container-fluid row">
         <!-- Side Navbar Start -->
         <div class="col-2">
@@ -157,10 +175,19 @@
                                 <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
                                 <div class="card-body bg-primary-subtle text-primary-emphasis">
                                     <h5 class="card-title">{{ $product->name }}</h5>
-                                    <p class="card-text">{{ $product->price }}</p>
+                                    <p class="card-text">Price: <b>{{ $product->price }}</b> BDT</p>
                                     <div class="text-center">
-                                        <button class="btn btn-sm btn-outline-success">Add to Cart</button>
-                                        <button class="btn btn-sm btn-danger">Buy Now</button>
+                                        <form action="{{ route('checkout.addToCart', $product->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-success">Add to
+                                                Cart</button>
+                                        </form>
+
+                                        <a href="{{ route('checkout.index', $product->id) }}"
+                                            class="btn btn-outline-danger">
+                                            Buy Now
+                                        </a>
                                     </div>
                                 </div>
                             </div>
