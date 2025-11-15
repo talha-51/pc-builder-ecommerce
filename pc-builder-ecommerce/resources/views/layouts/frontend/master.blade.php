@@ -9,6 +9,21 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
 
     <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            /* Push footer to bottom */
+        }
+
         .carousel-viewport {
             overflow: hidden;
         }
@@ -191,9 +206,9 @@
     </nav>
     <!-- Top Navbar End -->
 
-    <div>
+    <main>
         @yield('content')
-    </div>
+    </main>
 
 
     <!-- Footer Start -->

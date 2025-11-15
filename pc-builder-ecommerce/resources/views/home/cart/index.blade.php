@@ -17,10 +17,11 @@
             </div>
         @else
             <div class="d-flex justify-content-center">
-                <table class="table table-bordered w-75">
+                <table class="table w-75">
                     <tr>
                         <th>SL</th>
                         <th>Product Name</th>
+                        <th>Product Image</th>
                         <th>Quantity</th>
                         <th>Unit Price</th>
                         <th>Total Price</th>
@@ -30,6 +31,10 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ optional($products->firstWhere('id', $cartProduct->product_id))->name }}</td>
+                            <td>
+                                <img src="{{ asset($products->firstWhere('id', $cartProduct->product_id)->image) }}"
+                                    alt="" class="img-thumbnail" width="75">
+                            </td>
                             <td>{{ $cartProduct->quantity }}</td>
                             <td>{{ $cartProduct->unit_price }}</td>
                             <td>{{ $cartProduct->total_price }}</td>
@@ -43,17 +48,20 @@
                         </tr>
                     @endforeach
                     <tr>
+                        <td colspan="2">
+                            <div class="d-grid gap-2">
+                                <a href="{{ route('home.index') }}" class="btn btn-primary">Continue Shopping</a>
+                            </div>
+                        </td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <hr>
                         <td>
                             Sub-Total: <strong>{{ $cartProducts->sum('total_price') }}</strong><br>
                         </td>
                         <td>
                             <div class="d-grid gap-2">
-                                <a href="{{ route('cart.checkout') }}" class="btn btn-outline-primary">Checkout</a>
+                                <a href="{{ route('cart.checkout') }}" class="btn btn-primary">Checkout</a>
                             </div>
                         </td>
                     </tr>

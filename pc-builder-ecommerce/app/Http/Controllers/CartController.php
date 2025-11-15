@@ -11,7 +11,7 @@ class CartController extends Controller
     public function index()
     {
         $cartProducts = DB::table('carts')->where('user_id', Auth::id())->get();
-        $products = DB::table('products')->select('id', 'name')->get();
+        $products = DB::table('products')->select('id', 'name', 'image')->get();
 
         $cartCount = DB::table('carts')->where('user_id', Auth::id())->count();
 
@@ -37,9 +37,12 @@ class CartController extends Controller
 
     public function checkout()
     {
+        $cartProducts = DB::table('carts')->where('user_id', Auth::id())->get();
+        $products = DB::table('products')->select('id', 'name', 'image')->get();
+
         $cartCount = DB::table('carts')->where('user_id', Auth::id())->count();
 
-        return view('home.cart.checkout', compact('cartCount'));
+        return view('home.cart.checkout', compact('cartCount', 'cartProducts', 'products'));
     }
 
     public function confirmOrder()
