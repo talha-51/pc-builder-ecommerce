@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
@@ -8,7 +9,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CheckoutController;
+// use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubCategoryController;
 
@@ -36,9 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/user-list', [AdminController::class, 'userList'])->name('admin.userList');
 
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::post('/checkout', [CheckoutController::class, 'confirmOrder'])->name('checkout.confirmOrder');
-    Route::post('/checkout/add-to-cart/{id}', [CheckoutController::class, 'addToCart'])->name('checkout.addToCart');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/addToCart/{id}', [CartController::class, 'addToCart'])->name('cart.addToCart');
+
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::post('/confirm-order', [CartController::class, 'confirmOrder'])->name('cart.confirmOrder');
 
     // Resource Controllers
     Route::resource('slider', SliderController::class);

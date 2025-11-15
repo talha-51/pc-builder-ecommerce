@@ -10,6 +10,7 @@
 - **Hero Carousel single page CRUD with validation**
 - **Product Display Filtered by Category**
 - **Product Display Filtered by Sub-Category**
+- **Add to Cart functionality**
 - **Category CRUD with validation**
 - **Sub-Category CRUD with validation**
 - **Product CRUD with validation**

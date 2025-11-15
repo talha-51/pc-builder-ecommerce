@@ -18,6 +18,46 @@
             transition: transform 0.5s ease;
         }
 
+        /* Make controls always visible */
+        .carousel-control-prev,
+        .carousel-control-next {
+            opacity: 1 !important;
+        }
+
+        /* Style the control buttons */
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.4);
+            /* semi transparent */
+            padding: 18px;
+            /* bigger size */
+            border-radius: 50%;
+            /* fully round */
+            transition: 0.3s ease;
+            /* smooth hover effect */
+        }
+
+        /* Hover effect - more visible */
+        .carousel-control-prev-icon:hover,
+        .carousel-control-next-icon:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Move buttons near the edges */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 4%;
+        }
+
+        .carousel-control-prev {
+            left: 0 !important;
+        }
+
+        .carousel-control-next {
+            right: 0 !important;
+        }
+
+
         .product-card {
             flex: 0 0 20%;
             margin: 5px;
@@ -128,7 +168,7 @@
                 </ul>
                 @auth
                     <div class="d-flex justify-content-center gap-3">
-                        <a href="{{ route('checkout.index') }}" class="position-relative">
+                        <a href="{{ route('cart.index') }}" class="position-relative">
                             <button class="btn btn-success position-relative">
                                 Cart
                                 @if (isset($cartCount) && $cartCount > 0)

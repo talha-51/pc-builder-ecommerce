@@ -42,8 +42,13 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">{{ $product->price }}</p>
                             <div class="text-center">
-                                <button class="btn btn-sm btn-outline-success">Add to Cart</button>
-                                <button class="btn btn-sm btn-danger">Buy Now</button>
+                                <form action="{{ route('cart.addToCart', $product->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-success">Add to
+                                        Cart</button>
+                                </form>
+
+                                <a href="{{ route('cart.checkout') }}" class="btn btn-outline-danger">Buy Now</a>
                             </div>
                         </div>
                     </div>
